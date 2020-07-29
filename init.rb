@@ -15,7 +15,7 @@ end
 # Patches to the Redmine core.
 require 'dispatcher'
 
-ActionDispatch::Callbacks.to_prepare do
+ActiveSupport::Reloader.to_prepare do
   require_dependency 'time_entry'
   TimeEntry.send(:include, BulkTimeEntryPlugin::Patches::TimeEntryPatch)
 end
