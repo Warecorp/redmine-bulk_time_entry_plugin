@@ -1,5 +1,12 @@
 <%= javascript_include_tag 'application', plugin: 'redmine-bulk_time_entry_plugin' %>
-<h2><%= l(:label_bulk_time_entries) %></h2>
+<h2>
+<%= l(:label_bulk_time_entries) %>
+<%= form_tag(add_entry_path, remote: true, method: 'put', id: 'specify-issue-id', style: "margin-left: 2em;") do %>
+	<%= label_tag :specific_issue_id, "Añadir petición #" %>
+	<%= text_field_tag :specific_issue_id %>
+	<%= submit_tag "Enviar" %>
+<% end %>
+</h2>
 
 <%= form_for :bulk_time_entry_title, remote: true, :url => {:action => 'save'}, :html => {:class => 'tabular'} do |f| %>
   <div id="entries">

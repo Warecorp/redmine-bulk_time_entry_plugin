@@ -21,10 +21,15 @@
       <%= label_for_field :project_id, rnd, :required => true %>
       <% projects = project_tree_options_for_select(@projects, :selected => @first_project) %>
       <%= f.select :project_id, projects, {},
-        { :onchange => "changeIssuesForProject(this, #{rnd})", data: { url: load_assigned_issues_path } }%>
+        { :onchange => "changeIssuesForProject(#{rnd})", data: { url: load_assigned_issues_path } }%>
     </p>
-    <% @issues = get_issues @first_project.id %>
     <%= render :partial => 'issues_selector', :locals => { :issues => @issues, :f => f, :rnd => rnd } %>
+    <p>
+      <%= check_box_tag("#{rnd}_only_yours", true, false, { :onchange => "changeIssuesForProject(#{rnd})"}) %>
+      <span>Solo mostrar las tareas asignadas a mi</span>
+      <%= check_box_tag("#{rnd}_not_closed", true, false, { :onchange => "changeIssuesForProject(#{rnd})"}) %>
+      <span>No mostrar las tareas cerradas</span>
+    </p>
     <p>
       <%= label_for_field :spent_on, rnd, :required => true %>
       <%= f.text_field :spent_on, :size => 10, :name => "time_entries[#{rnd}][spent_on]", :id => "time_entries_#{rnd}_spent_on", :class => 'spent_on' %><%= calendar_for("time_entries_#{rnd}_spent_on") %>

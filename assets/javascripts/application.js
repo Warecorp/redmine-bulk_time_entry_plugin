@@ -6,13 +6,15 @@ function getLastTimeEntryDate() {
   }
 }
 
-function changeIssuesForProject(select, entryId) {
-  var $select = $(select);
+function changeIssuesForProject(entryId) {
+  var $select = $('#time_entries_'+entryId+'_project_id');
   var url = $select.data('url');
   var projectId = $select.val();
+  //this).closest('.not_closed').is(':checked'
+  //$("#not_closed").is(':checked')
   $.ajax({
     complete: function(request){},
-    data: 'project_id=' + projectId + '&entry_id=' + entryId,
+    data: 'project_id=' + projectId + '&entry_id=' + entryId + '&not_closed=' + $('#'+entryId+'_not_closed').is(':checked') + '&only_yours=' + $('#'+entryId+'_only_yours').is(':checked'),
     type: 'post',
     url: url
   });

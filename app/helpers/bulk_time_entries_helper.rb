@@ -3,24 +3,26 @@ module BulkTimeEntriesHelper
   def label_for_field(field, rnd_id, options = { })
     label_text = l(options[:label]) if options[:label]
     label_text ||= l(("field_"+field.to_s.gsub(/\_id$/, "")).to_sym)
-    label = content_tag(:label, label_text,
+    span = options.delete(:required) ? content_tag(:span, " *", :class => "required") : ""
+    label = content_tag(:label,
       :class => (@object && @object.errors[field] ? "error" : nil),
-      :for => (@object_name.to_s + "_" + rnd_id.to_s + "_" + field.to_s))
-    label << content_tag(:span, " *", :class => "required") if options.delete(:required)
+      :for => (@object_name.to_s + "_" + rnd_id.to_s + "_" + field.to_s)) do
+      (label_text + span).html_safe
+    end
     label
   end
 
   def grouped_options_for_issues(issues, selected = '')
-    closed_issues, open_issues = *issues.partition {|issue| issue.closed?}
+    closed_issues, open_issues = *issues.visible.partition {|issue| issue.closed?}
 
     html = content_tag :option
     unless open_issues.empty?
       html << labeled_option_group_from_collection_for_select(:label_open_issues, open_issues, selected)
     end
 
-    # unless closed_issues.empty?
-    #   html << labeled_option_group_from_collection_for_select(:label_closed_issues, closed_issues)
-    # end
+    unless closed_issues.empty?
+      html << labeled_option_group_from_collection_for_select(:label_closed_issues, closed_issues)
+    end
     html
   end
 
@@ -28,14 +30,5 @@ module BulkTimeEntriesHelper
     html = content_tag(:optgroup, '', label: l(label))
     html << options_from_collection_for_select(collection, :id, :to_s, selected)
     html
-  end
-
-  def get_issues(project_id)
-    project = BulkTimeEntriesController.allowed_project?(project_id)
-    if project
-      project.issues.order('id ASC')
-    else
-      []
-    end
   end
 end
