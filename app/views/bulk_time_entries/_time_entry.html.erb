@@ -24,12 +24,12 @@
         { :onchange => "changeIssuesForProject(#{rnd})", data: { url: load_assigned_issues_path } }%>
     </p>
     <%= render :partial => 'issues_selector', :locals => { :issues => @issues, :f => f, :rnd => rnd } %>
-    <p>
-      <%= check_box_tag("#{rnd}_only_yours", true, false, { :onchange => "changeIssuesForProject(#{rnd})"}) %>
+    <!-- <p>
+      <%#= check_box_tag("#{rnd}_only_yours", true, false, { :onchange => "changeIssuesForProject(#{rnd})"}) %>
       <span>Solo mostrar las tareas asignadas a mi</span>
-      <%= check_box_tag("#{rnd}_not_closed", true, false, { :onchange => "changeIssuesForProject(#{rnd})"}) %>
+      <%#= check_box_tag("#{rnd}_not_closed", true, false, { :onchange => "changeIssuesForProject(#{rnd})"}) %>
       <span>No mostrar las tareas cerradas</span>
-    </p>
+    </p> -->
     <p>
       <%= label_for_field :spent_on, rnd, :required => true %>
       <%= f.text_field :spent_on, :size => 10, :name => "time_entries[#{rnd}][spent_on]", :id => "time_entries_#{rnd}_spent_on", :class => 'spent_on' %><%= calendar_for("time_entries_#{rnd}_spent_on") %>
