@@ -1,10 +1,10 @@
 class BulkTimeEntriesController < ApplicationController
   unloadable
   layout 'base'
-  before_filter :load_activities
-  before_filter :load_allowed_projects
-  before_filter :load_first_project
-  before_filter :check_for_no_projects
+  before_action :load_activities
+  before_action :load_allowed_projects
+  before_action :load_first_project
+  before_action :check_for_no_projects
 
   helper :custom_fields
   include BulkTimeEntriesHelper
