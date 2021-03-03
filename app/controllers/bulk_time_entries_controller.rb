@@ -29,7 +29,7 @@ class BulkTimeEntriesController < ApplicationController
       @unsaved_entries = {}
       @saved_entries = {}
 
-      params.to_unsafe_h[:time_entries].each_pair do |html_id, entry|
+      request.params[:time_entries].each_pair do |html_id, entry|
         time_entry = TimeEntry.create_bulk_time_entry(entry)
         if time_entry.new_record?
           @unsaved_entries[html_id] = time_entry
