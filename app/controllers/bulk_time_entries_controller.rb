@@ -12,9 +12,9 @@ class BulkTimeEntriesController < ApplicationController
   protect_from_forgery :only => [:index, :save]
 
   # re-define params
-  # def params
-    # request.params
-  # end
+  def params
+    request.params
+  end
 
   def index
     @time_entries = [TimeEntry.new(:spent_on => today_with_time_zone.to_s)]
