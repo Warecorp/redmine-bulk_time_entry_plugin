@@ -1,4 +1,4 @@
-require bootstrap-datepicker
+//= require bootstrap-datepicker
 
 function getLastTimeEntryDate() {
   if ($('.spent_on').size() > 0) {
