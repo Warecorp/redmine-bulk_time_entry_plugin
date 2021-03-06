@@ -1,2 +1,2 @@
 source 'https://rubygems.org'
-gem 'bootstrap-datepicker-rails'
+# gem 'bootstrap-datepicker-rails'

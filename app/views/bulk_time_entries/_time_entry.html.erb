@@ -29,7 +29,7 @@
       <%= label_for_field :spent_on, rnd, :required => true %>
       <%= f.text_field :spent_on, :name => "time_entries[#{rnd}][spent_on]", :id => "time_entries_#{rnd}_spent_on", :class => 'spent_on' %>
       <%#= f.date_field :spent_on, :size => 10, :name => "time_entries[#{rnd}][spent_on]", :id => "time_entries_#{rnd}_spent_on", :class => 'spent_on' %>
-      <%#= calendar_for("time_entries_#{rnd}_spent_on") %>
+      <%= calendar_for("time_entries_#{rnd}_spent_on") %>
     </p>
     <p>
       <%= label_for_field :hours, rnd, :required => true %>
@@ -44,7 +44,4 @@
       <p><%= custom_field_tag_with_label "time_entries[#{rnd}]", value %></p>
     <% end if time_entry.respond_to?(:custom_field_values) %>
   </div>
-  <script>
-    $('#time_entries_#{rnd}_spent_on input').datepicker({keyboardNavigation: false, forceParse: false});
-  </script>
 <% end %>
