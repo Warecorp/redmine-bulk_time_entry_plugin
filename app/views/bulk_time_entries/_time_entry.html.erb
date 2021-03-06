@@ -32,7 +32,7 @@
         <i class="glyphicon glyphicon-th"></i>
       </span>
       <script>
-        $('#time_entries_#{rnd}_spent_on .input-group.date').datepicker({keyboardNavigation: false, forceParse: false});
+        $('#time_entries_#{rnd}_spent_on').datepicker({keyboardNavigation: false, forceParse: false});
       </script>
       <%#= f.date_field :spent_on, :size => 10, :name => "time_entries[#{rnd}][spent_on]", :id => "time_entries_#{rnd}_spent_on", :class => 'spent_on' %>
       <%#= calendar_for("time_entries_#{rnd}_spent_on") %>
