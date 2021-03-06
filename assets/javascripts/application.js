@@ -1,3 +1,5 @@
+require bootstrap-datepicker
+
 function getLastTimeEntryDate() {
   if ($('.spent_on').size() > 0) {
     return $('.spent_on')[($('.spent_on').length)-1].value;
